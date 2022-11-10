@@ -30,13 +30,17 @@ def IndexAirNavData(df, fn):
     df["FLIGHT_ID"] = df.index    
     df.FLIGHT_ID = df.FLIGHT_ID.astype(str)
     df.FLIGHT_ID =  'AirNav_' + fn + '_' + df.FLIGHT_ID
+    print('indexed ' + str(len(df.index)) + ' flights in file')
     return df
 
-def PrepareAirNavData(airnav_input, fn, bb_filter, write_normalized_raw = False):
+def PrepareAirNavData(airnav_input, fn, bb_filter, departure_airport, write_normalized = False):
     # airnav = pd.DataFrame(airnav_input) #why do we copy this data?   for convenience / to make it a dataframe?
     # indexed_airnav = IndexAirNavData(airnav, fn).set_index('FLIGHT_ID')
     IndexAirNavData(airnav_input, fn).set_index('FLIGHT_ID', inplace = True)
     
+    if departure_airport: 
+        airnav_input = airnav_input[airnav_input.aptkoic == departure_airport]
+        print('processing ' + str(len(airnav_input)) + ' flights departing ' + departure_airport)
     # airnav_positions = indexed_airnav['positions']
     airnav_positions = airnav_input['positions']    
     
@@ -57,15 +61,16 @@ def PrepareAirNavData(airnav_input, fn, bb_filter, write_normalized_raw = False)
         # ft = trajectory
         ft.lat = ft.lat.astype('float')
         ft.lon = ft.lon.astype('float')
-        if bb_filter and write_normalized_raw == False:
+        if bb_filter:
             ft = ft[(ft.lat >= bb_filter['lat1']) & (ft.lat <= bb_filter['lat2']) & (ft.lon >= bb_filter['lon1']) & (ft.lon <= bb_filter['lon2'])]
-        trajectories = pd.concat([ft, trajectories])        
+        trajectories = pd.concat([ft, trajectories])
+        print('Processed trajectory for flight' + flight_id)        
 
     print('Number of AirNav trajectory points: ', len(trajectories))
     
-    if write_normalized_raw:
-        airnav_without_positions.to_csv(os.path.join(os.curdir, 'Output/' + fn + '_schedule.csv'), index = False)
-        trajectories.to_csv(os.path.join(os.curdir, 'Output/' + fn + '_trajectory.csv'), index = False)
+    if write_normalized:
+        airnav_without_positions.to_csv(os.path.join(os.curdir, 'Output/' + fn + '_schedule.csv'), index = True)
+        trajectories.to_csv(os.path.join(os.curdir, 'Output/' + fn + '_trajectory.csv'), index = True)
     
     wide_airnav = CreateWidePositionsFrame(airnav_without_positions, trajectories)
   
@@ -78,40 +83,46 @@ def AugmentPositionData(wide_dataset, type):
         quit()
 
     #Convert the time into a datetime object
-    wide_dataset['Time (UTC)'] = pd.to_datetime(wide_dataset['svd'])
+    wide_dataset['Time (UTC)'] = pd.to_datetime(wide_dataset['svd'])    
+    
+    #Add a subindex that counts the datapoints within each unique flight
+    if 'POSITION_INDEX' not in wide_dataset.keys():
+        #Sort the data so it's all in order properly, by both time and flight ID
+        wide_dataset = wide_dataset.sort_values(by = ['FLIGHT_ID', 'Time (UTC)'])
+        wide_dataset = wide_dataset.set_index(wide_dataset.groupby('FLIGHT_ID').cumcount(), append = True)
+        wide_dataset['POSITION_INDEX'] = wide_dataset.index.to_flat_index().map(lambda x: x[1])    
 
-    #Sort the data so it's all in order properly, by both time and flight ID
-    wide_dataset = wide_dataset.sort_values(by = ['FLIGHT_ID', 'Time (UTC)'])
+    wide_dataset.set_index('FLIGHT_ID', inplace = True)
 
-    #next latitudes and longitudes are achieved by shifting index down by one
-    wide_dataset['Next Latitude'] = wide_dataset['lat'].shift(periods = -1).astype('float')
-    wide_dataset['Next Longitude'] = wide_dataset['lon'].shift(periods = -1).astype('float')
-
-    #Calculate the duration between the current and next point
-    wide_dataset['Duration (Seconds)'] = (wide_dataset['Time (UTC)'].shift(periods = -1) - wide_dataset['Time (UTC)']).dt.total_seconds()
-
+    #perform group by on FLIGHT_ID in order to do flight specific determinations
+    grouped = wide_dataset.groupby(wide_dataset.index.names)
+    
+    #prepare to access a flight group / position index combination 
+    wide_dataset["max_position_index"] = grouped['POSITION_INDEX'].apply(lambda x: x.max())
+    wide_dataset["is_max_position"] = wide_dataset.POSITION_INDEX == wide_dataset.max_position_index
+    wide_dataset.set_index('POSITION_INDEX', append = True, inplace = True)
+    
     #Use GeoPandas to convert the latitude and longitude to a geometric point for the current and next data
     wide_dataset = gpa.GeoDataFrame(wide_dataset)
     wide_dataset['POSITION_POINT'] = gpa.points_from_xy(wide_dataset['lon'], wide_dataset['lat'], crs = 4326)
-    wide_dataset['NEXT_POSITION_POINT'] = gpa.points_from_xy(wide_dataset['Next Longitude'], wide_dataset['Next Latitude'], crs = 4326)
     if 'aptkolo' in wide_dataset.columns.to_list():
         wide_dataset['TAKEOFF_APT_REF_PT'] = gpa.points_from_xy(wide_dataset['aptkolo'], wide_dataset['aptkola'], crs = 4326)
-    wide_dataset['GROUND_TRACK_LENGTH'] = np.nan
-
-    wide_dataset['SEGMENT'] = wide_dataset.apply(lambda x: sh.geometry.LineString([(x.lat, x.lon), (x["Next Latitude"], x["Next Longitude"])]), axis=1)
     wide_dataset['Line to airport'] = wide_dataset.apply(lambda x: sh.geometry.LineString([(x.lat, x.lon), (x["aptkola"], x["aptkolo"])]), axis=1)
     
-    #Ensure that the last point of a specific flight doesn't have the next flight's data copied over, and set the last duration to 0 seconds
-    for flight in wide_dataset['FLIGHT_ID'].unique():
-        point = list(wide_dataset.loc[wide_dataset['FLIGHT_ID'] == flight].index)[-1]
-        wide_dataset.loc[point, 'Next Latitude'] = np.nan
-        wide_dataset.loc[point, 'Next Longitude'] = np.nan
-        wide_dataset.loc[point, 'Duration (Seconds)'] = np.nan        
-        wide_dataset.loc[point, 'GROUND_TRACK_LENGTH'] = np.nan         
-        wide_dataset.loc[point, 'POSITION_POINT'] = np.nan
-        wide_dataset.loc[point, 'NEXT_POSITION_POINT'] = np.nan
-        wide_dataset.loc[point, 'TAKEOFF_APT_REF_PT'] = np.nan
+    #find info about next point shifting index down by one
+    wide_dataset['Next Latitude'] = wide_dataset['lat'].shift(periods = -1).astype('float')
+    wide_dataset['Next Longitude'] = wide_dataset['lon'].shift(periods = -1).astype('float')
+    wide_dataset['Duration (Seconds)'] = (wide_dataset['Time (UTC)'].shift(periods = -1) - wide_dataset['Time (UTC)']).dt.total_seconds()
+    wide_dataset['SEGMENT'] = wide_dataset.apply(lambda x: sh.geometry.LineString([(x.lat, x.lon), (x["Next Latitude"], x["Next Longitude"])]), axis=1)
+    wide_dataset['NEXT_POSITION_POINT'] = gpa.points_from_xy(wide_dataset['Next Longitude'], wide_dataset['Next Latitude'], crs = 4326)
+    wide_dataset['GROUND_TRACK_LENGTH'] = np.nan
 
+    #Ensure that the last point of a specific flight doesn't have the next flight's data copied over
+    wide_dataset.loc[wide_dataset.is_max_position == True,'Next Latitude'] = np.nan
+    wide_dataset.loc[wide_dataset.is_max_position == True, 'Next Longitude'] = np.nan
+    wide_dataset.loc[wide_dataset.is_max_position == True, 'Duration (Seconds)'] = np.nan        
+    wide_dataset.loc[wide_dataset.is_max_position == True, 'GROUND_TRACK_LENGTH'] = np.nan         
+    wide_dataset.loc[wide_dataset.is_max_position == True, 'NEXT_POSITION_POINT'] = np.nan
         
     # ToDo: create geospatially enabled line segment and test its length compared to the calculated distance between points
     # #Geopandas requires you to loop through every row individually when making lines.... which is very slow and inefficient
@@ -120,10 +131,7 @@ def AugmentPositionData(wide_dataset, type):
     # for i in list(wide_dataset.index):
     #     wide_dataset.loc[i, 'GROUND_TRACK'] = sh.geometry.LineString([wide_dataset.loc[i, 'POSITION_POINT'], wide_dataset.loc[i, 'NEXT_POSITION_POINT']])
     
-    #Add a subindex that counts the datapoints within each unique flight
-    wide_dataset = wide_dataset.set_index(wide_dataset.groupby('FLIGHT_ID').cumcount(), append = True)
-    if 'POSITION_INDEX' not in wide_dataset.keys():
-        wide_dataset['POSITION_INDEX'] = wide_dataset.index.to_flat_index().map(lambda x: x[1])
+
     
     return wide_dataset
 
@@ -142,14 +150,17 @@ def AugmentPositionData(wide_dataset, type):
 ##########################################################################################################################################
 Mainpath = pl.Path(__file__).parent.resolve()    
 source_data_directory_relative_path = "Source Data\\AirNav"
-# extracted_jsons_directory = 'C:\\Users\\Lyle.Tripp\\Downloads'
-extracted_jsons_directory = "C:\\Users\\Lyle.Tripp\\DOT OST\\volpe-org-324 - AEDT\\Lead emissions dispersion scoping\\Source Data\\AirNav\\Samples"
+extracted_jsons_directory = 'C:\\Users\\Lyle.Tripp\\Downloads'
+# extracted_jsons_directory = "C:\\Users\\Lyle.Tripp\\DOT OST\\volpe-org-324 - AEDT\\Lead emissions dispersion scoping\\Source Data\\AirNav\\Samples"
 field_descriptions = pd.read_excel(pl.Path.joinpath(Mainpath,source_data_directory_relative_path,"AirNav_FlightHistory_DataDumpFormat_20211018.xlsx"), "Schedule",skiprows=3)
 # field_descriptions["Row"] = field_descriptions.index
 # field_descriptions.set_index("Row", inplace=True)
 # field_descriptions.drop(axis=1,columns='Unnamed: 2',inplace=True)
 field_descriptions[field_descriptions['Description'].str.contains('takeoff')]
 list_of_geo_fields_to_drop = ['POSITION_POINT', 'NEXT_POSITION_POINT', 'TAKEOFF_APT_REF_PT']
+debug_json_errors = False
+chunksize = 1 if debug_json_errors else None
+write_normalized_instead_of_wide = True
 
 flightaware = {}
 flightaware["input_filename_sans_ext"] = 'FlightAware_KCRQ_Sample_2022-04-04 (2)'
@@ -176,9 +187,10 @@ for path, dirnames, filenames in os.walk(extracted_jsons_directory):
         if f[-5:] == '.json':
             json_filelist.append(f)
 bb_filter = {'lat1':32.5100, 'lon1':-118.1400, 'lat2':34.0800, 'lon2':-114.4300} #NAD83(NSRS2007) / California zone 6 (Google it) WGS84 Bounds: -118.1400, 32.5100, -114.4300, 34.0800
-json_filelist = json_filelist[0:2]
-json_filelist.pop(1)
+json_filelist = [f for f in json_filelist if f != '20221026181700049_dot-v4.json'] #
 print(json_filelist)
+
+# In[1]
 for filename in json_filelist:
     print(filename) #curious that a single file appears more than once in this list
     airnav = {}
@@ -186,26 +198,39 @@ for filename in json_filelist:
     airnav["input_file_extension"] = '.json'
     airnav_input_filename = airnav["input_filename_sans_ext"] + airnav["input_file_extension"]
     airnav_filepath = os.path.abspath(extracted_jsons_directory+"\\"+airnav_input_filename)
-    air = pd.read_json(airnav_filepath, lines = True, encoding_errors = 'ignore')
-    wide_airnav = PrepareAirNavData(air, airnav_input_filename, bb_filter)
-    #optionally write some raw data to file
-    # PrepareAirNavData(air, airnav_input_filename, bb_filter = None, write_normalized_raw=True)
-    augmented_airnav = AugmentPositionData(wide_airnav.reset_index(), 'AirNav' )
-    augmented_airnav.set_geometry('Line to airport', crs = 3499)
-    #ToDo: try using distance or length functions on projected coordinates https://geopandas.org/en/stable/docs/reference/api/geopandas.GeoSeries.distance.html
-        # augmented_and_filtered_airnav = augmented_airnav[[augmented_airnav['Line to airport']]] 
-    augmented_airnav_no_geom = augmented_airnav.drop(list_of_geo_fields_to_drop, axis = 1)
-    output_filepath = os.path.join(os.curdir, 'Output/Testing/' + 'Modified_AirNav' + airnav["input_filename_sans_ext"] + '.csv')
-    augmented_airnav_no_geom.to_csv(output_filepath, index = False)
+    if debug_json_errors == False: 
+        air = pd.read_json(airnav_filepath, lines = True, encoding_errors = 'ignore')
+    else:
+        with pd.read_json(airnav_filepath, lines = True, encoding_errors = 'ignore', chunksize=chunksize) as reader:
+            reader
+            for chunk in reader:
+                print(chunk)
+
+    if write_normalized_instead_of_wide:
+        PrepareAirNavData(air, airnav_input_filename, bb_filter = None, departure_airport = 'KCRQ', write_normalized=True)
+    else:                            
+        wide_airnav = PrepareAirNavData(air, airnav_input_filename, bb_filter, 'KCRQ')
+        
+        augmented_airnav = AugmentPositionData(wide_airnav.reset_index(), 'AirNav' )
+        augmented_airnav.set_geometry('Line to airport', crs = 3499)
+        #ToDo: try using distance or length functions on projected coordinates https://geopandas.org/en/stable/docs/reference/api/geopandas.GeoSeries.distance.html
+            # augmented_and_filtered_airnav = augmented_airnav[[augmented_airnav['Line to airport']]] 
+        augmented_airnav_no_geom = augmented_airnav.drop(list_of_geo_fields_to_drop, axis = 1)
+        output_filepath = os.path.join(os.curdir, 'Output/' + 'Modified_AirNav' + airnav["input_filename_sans_ext"] + '.csv')
+        augmented_airnav_no_geom.to_csv(output_filepath, index = False)
+        
+        del wide_airnav, augmented_airnav, augmented_airnav_no_geom
+
+    del air
 
 ##########################################################################################################################################
 
-# In[diagnostics]:
-fa_calls = pd.DataFrame(augmented_fa.loc[:,'cs'].reset_index(drop = True).to_frame().groupby('cs').indices.keys()).set_index(0, verify_integrity = True)
-airnav_calls = pd.DataFrame(augmented_airnav.loc[:,'cs'].reset_index(drop = True).to_frame().groupby('cs').indices.keys()).set_index(0, verify_integrity = True)
-print(fa_calls)
-print(airnav_calls)
-#is there anything in FA that's not in AirNav (we would do this in SQL with EXCEPT)
-print(len(fa_calls.join(airnav_calls, how='left')))
-print(len(fa_calls.join(airnav_calls, how='right')))
-print(len(fa_calls.join(airnav_calls, how='inner'))) 
+# # In[diagnostics]:
+# fa_calls = pd.DataFrame(augmented_fa.loc[:,'cs'].reset_index(drop = True).to_frame().groupby('cs').indices.keys()).set_index(0, verify_integrity = True)
+# airnav_calls = pd.DataFrame(augmented_airnav.loc[:,'cs'].reset_index(drop = True).to_frame().groupby('cs').indices.keys()).set_index(0, verify_integrity = True)
+# print(fa_calls)
+# print(airnav_calls)
+# #is there anything in FA that's not in AirNav (we would do this in SQL with EXCEPT)
+# print(len(fa_calls.join(airnav_calls, how='left')))
+# print(len(fa_calls.join(airnav_calls, how='right')))
+# print(len(fa_calls.join(airnav_calls, how='inner'))) 
