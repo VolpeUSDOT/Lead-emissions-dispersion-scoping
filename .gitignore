@@ -1,0 +1,78 @@
+
+.gitattributes
+.ipynb_checkpoints/sniffing_operations-checkpoint.ipynb
+.spyproject/config/backups/codestyle.ini.bak
+.spyproject/config/backups/encoding.ini.bak
+.spyproject/config/backups/vcs.ini.bak
+.spyproject/config/backups/workspace.ini.bak
+.spyproject/config/codestyle.ini
+.spyproject/config/defaults/defaults-codestyle-0.2.0.ini
+.spyproject/config/defaults/defaults-encoding-0.2.0.ini
+.spyproject/config/defaults/defaults-vcs-0.2.0.ini
+.spyproject/config/defaults/defaults-workspace-0.2.0.ini
+.spyproject/config/encoding.ini
+.spyproject/config/vcs.ini
+.spyproject/config/workspace.ini
+AirNav_new_position_coordinates.xlsx
+CAEP task/FlightAware Track Report Data Dictionary.docx
+CAEP task/Input/FlightAware_KCRQ_Sample_2019-04-04.csv
+CAEP task/Input/Sample-DOT-KCRQ-2019-04-04.json
+CAEP task/Input/Sample-DOT-KCRQ-2021-04-04.json
+CAEP task/Testing.py
+common_schedule_and_position_fields.xlsx
+KCRQ_runup_area_1.kml
+KCRQ_Runup_location_Runway_24.png
+operations_sniff.twb
+operations_sniff_v2.twbx
+operations_sniff_v3.twbx
+operations_sniff_v4.twbx
+operations_sniff_v4_normalized.twbx
+operations_sniff_v5.twbx
+Output/20221020185900000_dot-v4.json_schedule.csv
+Output/20221020185900000_dot-v4.json_trajectory.csv
+Output/20221026181700049_dot-v4.json_schedule.csv
+Output/20221026181700049_dot-v4.json_trajectory.csv
+Output/Testing/Modified_AirNavSample-DOT-KCRQ-2019-04-04.csv
+Output/Testing/ModifiedFlightAware_KCRQ_Sample_2022-04-04 (2).csv
+Output/Testing/Sample-DOT-KCRQ-2019-04-04.json_schedule.csv
+Output/Testing/Sample-DOT-KCRQ-2019-04-04.json_trajectory.csv
+Runups/Operations_without_runups_sample.csv
+Runups/populate_RUNUP_OPERATION.sql
+Runups/Run-up_KBED/N7258C_run-up_KBED.MOV
+Runups/Run-up_KBED/Run-up_timeline.txt
+Runups/Runups_AirNav_sample.csv
+Runups/Runups_AirNav_sample.xlsx
+sniff_testing_runups.xlsx
+Source Data/AirNav/2021/2021-01_20221020185900000_dot-v4.json.gz
+Source Data/AirNav/2021/2021-02_20221020201000002_dot-v4.json.gz
+Source Data/AirNav/2021/2021-03_20221020205700006_dot-v4.json.gz
+Source Data/AirNav/2021/2021-04_20221021140700011_dot-v4.json.gz
+Source Data/AirNav/2021/2021-05_20221021155800038_dot-v4.json.gz
+Source Data/AirNav/2021/2021-06_20221021180100008_dot-v4.json.gz
+Source Data/AirNav/2021/2021-07_20221021202700043_dot-v4.json.gz
+Source Data/AirNav/2021/2021-08_20221021234000010_dot-v4.json.gz
+Source Data/AirNav/2021/2021-09_20221024195900046_dot-v4.json.gz
+Source Data/AirNav/2021/2021-10-01_20221025165300045_dot-v4.json.gz
+Source Data/AirNav/2021/2021-10-15_20221026125600011_dot-v4.json.gz
+Source Data/AirNav/2021/2021-11-01_20221026144800020_dot-v4.json.gz
+Source Data/AirNav/2021/2021-11-15_20221026160600024_dot-v4.json.gz
+Source Data/AirNav/2021/2021-12-01_20221026181700049_dot-v4.json.gz
+Source Data/AirNav/2021/2022-12-15_20221026231900014_dot-v4.json.gz
+Source Data/AirNav/AirNav_FlightHistory_DataDumpFormat_20211018.pdf
+Source Data/AirNav/AirNav_FlightHistory_DataDumpFormat_20211018.xlsx
+Source Data/AirNav/Purchase Order Statement of Requirements.docx
+Source Data/AirNav/Samples/Sample-DOT-KCRQ-2019-04-04.json
+Source Data/AirNav/Samples/Sample-DOT-KCRQ-2021-04-04.json
+Source Data/FlightAware/FlightAware Track Report Data Dictionary.docx
+Source Data/FlightAware/FlightAware_KCRQ_Sample_2022-04-04 (2).csv
+Source Data/KCRQ Airport/05310AD.pdf
+Source Data/KCRQ Airport/KCRQ.kml
+Source Data/KCRQ Airport/KCRQ_2.kml
+Source Data/KCRQ Airport/KCRQ_runup_area_2.kml
+Source Data/KCRQ Airport/Polygon Converted.csv
+Source Data/QueryMitreForWideData.sql
+Testing_with_chunks.py
+~operations_sniff_v4_normalized__19692.twbr
+~operations_sniff_v4_normalized__20028.twbr
+~operations_sniff_v5__12552.twbr
+~operations_sniff_v5__14060.twbr
