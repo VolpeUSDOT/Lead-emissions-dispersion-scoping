@@ -154,6 +154,18 @@ def filterWithPolygon(wide_data, polygons):
     #Export to a second CSV file that only has the filtered results
     return wide_data.loc[wide_data['point_within_polygons'] == False]
 
+def distanceAndSpeed(lon1, lat1, lon2, lat2, timedelta=None):                                                                                  
+    ''' Returns the distance between the points in m. Vectorized and will work with arrays and return an array of       
+    distances, but will also work with scalars and return a scalar. If timedelta is populated, the speed is also output as a separate output.
+    timedelta should be a scalar in seconds. Speed is calculated in meters per second.'''                                                  
+    lon1, lat1, lon2, lat2 = map(np.radians, [lon1, lat1, lon2, lat2])                                                  
+    a = np.sin((lat2 - lat1) / 2.0)**2 + (np.cos(lat1) * np.cos(lat2) * np.sin((lon2 - lon1) / 2.0)**2)                 
+    distance = 6371 * 2 * np.arcsin(np.sqrt(a))/1000                                                                         
+    if timedelta is None:
+        return distance
+    else:
+        return distance, distance/timedelta
+
 # In[1]:
 ##########################################################################################################################################
 debug_json_errors = False
@@ -163,22 +175,24 @@ write_normalized_instead_of_wide = False
 Mainpath = pl.Path(__file__).parent.resolve()    
 source_data_directory_relative_path = "Source Data\\AirNav"
 # extracted_jsons_directory = 'C:\\Users\\Lyle.Tripp\\Downloads'
-extracted_jsons_directory = "C:\\Users\\Lyle.Tripp\\DOT OST\\volpe-org-324 - AEDT\\Lead emissions dispersion scoping\\Source Data\\AirNav\\Samples"
-field_descriptions = pd.read_excel(pl.Path.joinpath(Mainpath,source_data_directory_relative_path,"AirNav_FlightHistory_DataDumpFormat_20211018.xlsx"), "Schedule",skiprows=3)
+
+# extracted_jsons_directory = "C:\\Users\\Lyle.Tripp\\DOT OST\\volpe-org-324 - AEDT\\Lead emissions dispersion scoping\\Source Data\\AirNav\\Samples"
+extracted_jsons_directory = r"C:\Users\William.Chupp\OneDrive - DOT OST\Documents\AEDTEmissionsSupport"
+# field_descriptions = pd.read_excel(pl.Path.joinpath(Mainpath,source_data_directory_relative_path,"AirNav_FlightHistory_DataDumpFormat_20211018.xlsx"), "Schedule",skiprows=3)
 # field_descriptions["Row"] = field_descriptions.index
 # field_descriptions.set_index("Row", inplace=True)
 # field_descriptions.drop(axis=1,columns='Unnamed: 2',inplace=True)
-position_object_index = field_descriptions[field_descriptions["Field Name"] == 'positions'].index.to_list().pop()
-field_descriptions[field_descriptions['Description'].str.contains('takeoff')]
-airnav_schedule_field_names_list = field_descriptions["Field Name"].drop(index = position_object_index, axis = 0).to_list()
+# position_object_index = field_descriptions[field_descriptions["Field Name"] == 'positions'].index.to_list().pop()
+# field_descriptions[field_descriptions['Description'].str.contains('takeoff')]
+# airnav_schedule_field_names_list = field_descriptions["Field Name"].drop(index = position_object_index, axis = 0).to_list()
 airnav_positions_field_names_list = ['svd','lat','lon','fhd','fgs','fvr','so','sq','fal']
 
 list_of_geo_fields_to_drop = ['POSITION_POINT', 'NEXT_POSITION_POINT', 'TAKEOFF_APT_REF_PT']
 
-flightaware = {}
-flightaware["input_filename_sans_ext"] = 'FlightAware_KCRQ_Sample_2022-04-04 (2)'
-flightaware["input_file_extension"] = '.csv'
-fa_input_filename = flightaware["input_filename_sans_ext"] + flightaware["input_file_extension"]
+# flightaware = {}
+# flightaware["input_filename_sans_ext"] = 'FlightAware_KCRQ_Sample_2022-04-04 (2)'
+# flightaware["input_file_extension"] = '.csv'
+# fa_input_filename = flightaware["input_filename_sans_ext"] + flightaware["input_file_extension"]
 # fa = pd.read_csv(os.curdir+'\\Source Data'+'\\'+fa_input_filename)
 # remap = MapOperationsColumns(fa, 'FlightAware')
 # augmented_fa = AugmentPositionData(fa.rename(axis = 1, mapper = remap), 'FlightAware')
@@ -198,6 +212,7 @@ json_filelist =  [f for f in json_filelist] #
 print(json_filelist)
 
 # In[reading shapes]
+gpa.io.file.fiona.drvsupport.supported_drivers['KML'] = 'rw'
 polygons = gpa.read_file(pl.Path.joinpath(Mainpath, 'Source Data/KCRQ Airport/' + 'KCRQ_2 - Copy (2).kml'))
 
 # In[1]
