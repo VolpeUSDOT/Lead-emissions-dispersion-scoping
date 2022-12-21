@@ -1,4 +1,7 @@
-
+*.csv
+*.json*
+*.hyper
+*.twb*
 .gitattributes
 .ipynb_checkpoints/sniffing_operations-checkpoint.ipynb
 .spyproject/config/backups/codestyle.ini.bak
@@ -76,3 +79,4 @@ Testing_with_chunks.py
 ~operations_sniff_v4_normalized__20028.twbr
 ~operations_sniff_v5__12552.twbr
 ~operations_sniff_v5__14060.twbr
+Modified_AirNav.tdsx

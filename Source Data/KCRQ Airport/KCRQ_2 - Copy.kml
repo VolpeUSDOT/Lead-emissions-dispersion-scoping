@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document id="1Pj6UMy4NLeRWr4r0WoUS4uiMbU8QnBJ8">
+	<name>KCRQ</name>
+	<description>Runups analysis</description>
+	<gx:CascadingStyle kml:id="__managed_style_0F39836C062509A92F25">
+		<styleUrl>https://earth.google.com/balloon_components/base/1.0.23.0/card_template.kml#main</styleUrl>
+		<Style>
+			<IconStyle>
+				<scale>1.2</scale>
+				<Icon>
+					<href>https://earth.google.com/earth/rpc/cc/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2dc0fb</color>
+				<width>4.8</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<gx:CascadingStyle kml:id="__managed_style_1E47104A8B2509A92F24">
+		<styleUrl>https://earth.google.com/balloon_components/base/1.0.23.0/card_template.kml#main</styleUrl>
+		<Style>
+			<IconStyle>
+				<Icon>
+					<href>https://earth.google.com/earth/rpc/cc/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2dc0fb</color>
+				<width>3.2</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<StyleMap id="__managed_style_045DB559092509A92F24">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#__managed_style_1E47104A8B2509A92F24</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#__managed_style_0F39836C062509A92F25</styleUrl>
+		</Pair>
+	</StyleMap>
+	<gx:CascadingStyle kml:id="__managed_style_0EBE9AB7C22509A92F22">
+		<styleUrl>https://earth.google.com/balloon_components/base/1.0.23.0/card_template.kml#main</styleUrl>
+		<Style>
+			<IconStyle>
+				<scale>1.2</scale>
+				<Icon>
+					<href>https://earth.google.com/earth/rpc/cc/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff5053ef</color>
+				<width>4.8</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>405053ef</color>
+			</PolyStyle>
+			<BalloonStyle>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<gx:CascadingStyle kml:id="__managed_style_032B872B6A2509A92F21">
+		<styleUrl>https://earth.google.com/balloon_components/base/1.0.23.0/card_template.kml#main</styleUrl>
+		<Style>
+			<IconStyle>
+				<Icon>
+					<href>https://earth.google.com/earth/rpc/cc/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff5053ef</color>
+				<width>3.2</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>405053ef</color>
+			</PolyStyle>
+			<BalloonStyle>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<StyleMap id="__managed_style_0B765DD6C92509A92F1F">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#__managed_style_032B872B6A2509A92F21</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#__managed_style_0EBE9AB7C22509A92F22</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Placemark id="0361D9D0CD237FD25363">
+		<name>Runup area 1</name>
+		<description><![CDATA[<div>KCRQ</div>]]></description>
+		<LookAt>
+			<longitude>-117.2716797938061</longitude>
+			<latitude>33.13163710323808</latitude>
+			<altitude>103.9191747412005</altitude>
+			<heading>-155.3747097310017</heading>
+			<tilt>43.54649618090218</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>668.6061556496134</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_0B765DD6C92509A92F1F</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						-117.272521402733,33.13054059246112,96.5485258462775 -117.2733380507133,33.1304557136826,96.14631638191558 -117.2735611255599,33.13024780565125,96.35270381509837 -117.275692208069,33.12990740775977,94.94378419380499 -117.2756814966272,33.12965641035417,95.06350780885609 -117.272625984229,33.13014727762189,97.11007651199438 -117.2723998315541,33.13018482661514,97.2645945729043 -117.272521402733,33.13054059246112,96.5485258462775 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark id="0F986E069524DAE56E71">
+		<name>Runup Area 2</name>
+		<description><![CDATA[<div>KCRQ</div>]]></description>
+		<LookAt>
+			<longitude>-117.2726671959573</longitude>
+			<latitude>33.12835052006287</latitude>
+			<altitude>96.19229864678039</altitude>
+			<heading>4.164563803093579</heading>
+			<tilt>6.037256978495091</tilt>
+			<gx:fovy>30</gx:fovy>
+			<range>492.1171268159379</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_045DB559092509A92F24</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						-117.2721848063671,33.12884876686246,96.66762904746838 -117.2724070007736,33.12881195945951,96.74910043119056 -117.2726035945334,33.1285047276213,96.38581758934207 -117.2725355698241,33.12818042266949,95.75243671532709 -117.2720850403633,33.12826702766164,95.28901500168807 -117.2717392368341,33.128568469517,95.60921329776771 -117.2721848063671,33.12884876686246,96.66762904746838 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark id="0A000467B62509AA0FAF">
+		<name>A1 midsection</name>
+		<description><![CDATA[<div>KCRQ</div>]]></description>
+		<LookAt>
+			<longitude>-117.2737157225479</longitude>
+			<latitude>33.12936049361486</latitude>
+			<altitude>97.71719943361614</altitude>
+			<heading>1.849437847312174e-15</heading>
+			<tilt>0</tilt>
+			<gx:fovy>30</gx:fovy>
+			<range>1000.020609266212</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_045DB559092509A92F24</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						-117.2730582070708,33.12897150300799,97.4165094968568 -117.2730449746977,33.12885631996205,97.19428522905035 -117.2720627349466,33.12899316860675,96.79856809970617 -117.2720954940786,33.12916312390764,96.81694182047345 -117.2730582070708,33.12897150300799,97.4165094968568 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+</Document>
+</kml>

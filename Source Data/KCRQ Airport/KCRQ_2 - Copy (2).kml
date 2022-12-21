@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document id="1Pj6UMy4NLeRWr4r0WoUS4uiMbU8QnBJ8">
+	<name>KCRQ</name>
+	<description>Runups analysis</description>
+	<StyleMap id="__managed_style_0CABC4C34C25C805A42F">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#__managed_style_1EAA65B47A25C805A42F</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#__managed_style_2E488A8A2C25C805A42F</styleUrl>
+		</Pair>
+	</StyleMap>
+	<gx:CascadingStyle kml:id="__managed_style_19F8EFF19525C3382472">
+		<Style>
+			<IconStyle>
+				<Icon>
+					<href>https://earth.google.com/earth/rpc/cc/icon?color=fbc02d&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2dc0fb</color>
+				<width>4</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+				<gx:displayMode>card</gx:displayMode>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<gx:CascadingStyle kml:id="__managed_style_1DFA1BF21025C33C1D80">
+		<Style>
+			<IconStyle>
+				<Icon>
+					<href>https://earth.google.com/earth/rpc/cc/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2dc0fb</color>
+				<width>4</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+				<text><![CDATA[<div>KCRQ<div>]]></text>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<gx:CascadingStyle kml:id="__managed_style_0E9C54A10B25C33C1D81">
+		<Style>
+			<IconStyle>
+				<scale>1.2</scale>
+				<Icon>
+					<href>https://earth.google.com/earth/rpc/cc/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2dc0fb</color>
+				<width>6</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+				<text><![CDATA[<div>KCRQ<div>]]></text>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<gx:CascadingStyle kml:id="__managed_style_1EAA65B47A25C805A42F">
+		<Style>
+			<IconStyle>
+				<Icon>
+					<href>https://earth.google.com/earth/rpc/cc/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2dc0fb</color>
+				<width>3.2</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<gx:CascadingStyle kml:id="__managed_style_0C9081415C25C3382476">
+		<Style>
+			<IconStyle>
+				<scale>1.2</scale>
+				<Icon>
+					<href>https://earth.google.com/earth/rpc/cc/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2dc0fb</color>
+				<width>6</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+				<text><![CDATA[<div>KCRQ</div>]]></text>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<StyleMap id="__managed_style_01F139634025C33C1D80">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#__managed_style_1DFA1BF21025C33C1D80</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#__managed_style_0E9C54A10B25C33C1D81</styleUrl>
+		</Pair>
+	</StyleMap>
+	<gx:CascadingStyle kml:id="__managed_style_2E488A8A2C25C805A42F">
+		<Style>
+			<IconStyle>
+				<scale>1.2</scale>
+				<Icon>
+					<href>https://earth.google.com/earth/rpc/cc/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2dc0fb</color>
+				<width>4.8</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<gx:CascadingStyle kml:id="__managed_style_2574CC023C25C3382472">
+		<Style>
+			<IconStyle>
+				<scale>1.2</scale>
+				<Icon>
+					<href>https://earth.google.com/earth/rpc/cc/icon?color=fbc02d&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2dc0fb</color>
+				<width>6</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+				<gx:displayMode>card</gx:displayMode>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<StyleMap id="__managed_style_0050B00AA825C3382472">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#__managed_style_19F8EFF19525C3382472</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#__managed_style_2574CC023C25C3382472</styleUrl>
+		</Pair>
+	</StyleMap>
+	<gx:CascadingStyle kml:id="__managed_style_15F773297025C3382475">
+		<Style>
+			<IconStyle>
+				<Icon>
+					<href>https://earth.google.com/earth/rpc/cc/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2dc0fb</color>
+				<width>4</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+				<text><![CDATA[<div>KCRQ</div>]]></text>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<StyleMap id="__managed_style_0A2A5D16B325C3382475">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#__managed_style_15F773297025C3382475</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#__managed_style_0C9081415C25C3382476</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Placemark id="0F986E069524DAE56E71">
+		<name>Runup Area 2</name>
+		<LookAt>
+			<longitude>-117.2726671959573</longitude>
+			<latitude>33.12835052006287</latitude>
+			<altitude>96.19229864678039</altitude>
+			<heading>4.164563803093579</heading>
+			<tilt>6.037256978495091</tilt>
+			<gx:fovy>30</gx:fovy>
+			<range>492.1171268159379</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_0A2A5D16B325C3382475</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						-117.2721848063671,33.12884876686246,96.66762904746838 -117.2724070007736,33.12881195945951,96.74910043119056 -117.2726035945334,33.1285047276213,96.38581758934207 -117.2725355698241,33.12818042266949,95.75243671532709 -117.2720850403633,33.12826702766164,95.28901500168807 -117.2717392368341,33.128568469517,95.60921329776771 -117.2721848063671,33.12884876686246,96.66762904746838 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark id="0A000467B62509AA0FAF">
+		<name>Taxiway A1 North Section</name>
+		<LookAt>
+			<longitude>-117.2737157225479</longitude>
+			<latitude>33.12936049361486</latitude>
+			<altitude>97.71719943361614</altitude>
+			<heading>1.849437847312174e-15</heading>
+			<tilt>0</tilt>
+			<gx:fovy>30</gx:fovy>
+			<range>1000.020609266212</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_0A2A5D16B325C3382475</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						-117.2730341625689,33.1291131139647,97.4165094968568 -117.2730205641004,33.12905208301655,97.19428522905035 -117.2721408437742,33.12921035399081,96.79856809970617 -117.2721532711554,33.12926929348118,96.81694182047345 -117.2730341625689,33.1291131139647,97.4165094968568 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark id="0CEF466360255037396F">
+		<name>McClellan-Palomar Airport</name>
+		<gx:mid>/m/06h9_k</gx:mid>
+		<gx:fid>0x80dc7367d28cb5e1:0xf87c7a958749ef44</gx:fid>
+		<LookAt>
+			<longitude>-117.2792408</longitude>
+			<latitude>33.12682160000001</latitude>
+			<altitude>0</altitude>
+			<heading>0</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>867.5740463967691</range>
+			<altitudeMode>relativeToGround</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_0050B00AA825C3382472</styleUrl>
+		<Point>
+			<altitudeMode>relativeToGround</altitudeMode>
+			<coordinates>-117.2790557187265,33.12525222555163,0</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark id="07F9D7BDC125C33B016E">
+		<name>Runup area 1</name>
+		<LookAt>
+			<longitude>-117.2727726008554</longitude>
+			<latitude>33.1303300875155</latitude>
+			<altitude>96.85196317310606</altitude>
+			<heading>-155.3743225370861</heading>
+			<tilt>43.54320373371875</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>137.1572801041293</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_01F139634025C33C1D80</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						-117.2725558457986,33.13045494857549,96.80689905041804 -117.2727030456958,33.13051057544067,96.56822825008931 -117.2733224592233,33.13040947781346,96.24936786622038 -117.2734846864889,33.13021756798114,96.57217296319675 -117.2724597295309,33.13036812242888,96.99395178227397 -117.2725558457986,33.13045494857549,96.80689905041804 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark id="060A1D086F25C33D161A">
+		<name>Taxiway N1</name>
+		<LookAt>
+			<longitude>-117.2726712837451</longitude>
+			<latitude>33.12992215904713</latitude>
+			<altitude>97.34487010057866</altitude>
+			<heading>-168.0651888857809</heading>
+			<tilt>46.05567666755559</tilt>
+			<gx:fovy>34.99999998854206</gx:fovy>
+			<range>135.3914135753075</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_01F139634025C33C1D80</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						-117.2724142823597,33.13018686846748,97.2566665197149 -117.2725808942504,33.13016185480846,97.19031365318446 -117.2724924607188,33.1297380472874,97.50140889477356 -117.2723257859751,33.12976305684244,97.49938765928837 -117.2724142823597,33.13018686846748,97.2566665197149 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark id="0D837FC85F25C805A42D">
+		<name>Taxiway A1 South Section</name>
+		<LookAt>
+			<longitude>-117.2728674828356</longitude>
+			<latitude>33.12866975591779</latitude>
+			<altitude>96.95850917564127</altitude>
+			<heading>38.35188066473997</heading>
+			<tilt>7.560463414384404</tilt>
+			<gx:fovy>30</gx:fovy>
+			<range>105.2354330675007</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_0CABC4C34C25C805A42F</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						-117.2729705019216,33.12879233557778,97.11305360701196 -117.2729558457089,33.12872904486884,97.11305440204437 -117.272179295215,33.12885085210488,96.64945477232021 -117.2721873042807,33.12889672673001,96.7351967503842 -117.2729705019216,33.12879233557778,97.11305360701196 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+</Document>
+</kml>
